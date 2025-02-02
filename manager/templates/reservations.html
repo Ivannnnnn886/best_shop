@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<section id="booking" class="booking">
+    <div class="container" data-aos="fade-up">
+        <div class="section-header">
+            <h2></h2>
+            <p>Orders</p>
+        </div>
+
+        <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            {% for category in categories %}
+                {% if forloop.first %}
+                    <li class="nav-item">
+                        <a class="nav-link active show" data-bs-toggle="tab" data-bs-target="#menu-category-{{ category.pk }}">
+                            <h4>{{ category.name }}</h4>
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" data-bs-toggle="tab" data-bs-target="#menu-category-{{ category.pk }}">
+                            <h4>{{ category.name }}</h4>
+                        </a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        <div class="tab-content" data-aos="fade-up" data-aos-delay="300">
+            {% for item in items %}
+                <div>
+                    <div>{{ item.name }}</div>
+                    <div>{{ item.email }}</div>
+                    <div>{{ item.phone }}</div>
+                    <div>{{ item.count }}</div>
+                    <div>{{ item.message }}</div>
+                    <div><a href="{% url 'manager:booking_confirm' item.pk %}">Confirm</a></div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
